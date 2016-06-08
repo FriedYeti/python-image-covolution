@@ -1,6 +1,5 @@
 import os
 import PIL.Image
-# import numpy
 import time
 from Tkinter import *
 
@@ -21,15 +20,10 @@ for x in range(0, convMask):
         # cnt = cnt+1
 convMatrix[1][1] = 1
 
-# print convMatrix[0][0], convMatrix[0][1], convMatrix[0][2]  # debug statements
-# print convMatrix[1][0], convMatrix[1][1], convMatrix[1][2]
-# print convMatrix[2][0], convMatrix[2][1], convMatrix[2][2]
-
 # ----------------------------------------------Load Images----------------------------------------------#
 image = PIL.Image.open("bumbleKoda.png")  # Open default image to memory
 thumbnailImage = PIL.Image.open("bumbleKoda.png")  # Open another copy of image, to be used as thumbnail
 thumbnailImage.thumbnail(size, PIL.Image.ANTIALIAS)  # Turn thumbnailImage into a image with max 'size' of size
-# thumbnailImage.save("testBumbleKodaThumbnail.png") #Saves the thumbnail (for future use?)
 
 # ----------------------------------------------Pre Process Images----------------------------------------------#
 if image.mode != 'RGB':  # Removes alpha channel if RGBA, sets to RGB if other
@@ -43,7 +37,6 @@ newPixels = pixels  # To be used when processing, will hold new image while proc
 
 imageWidth = image.size[0]
 imageHeight = image.size[1]
-# print imageWidth,"x",imageHeight #debug statement
 
 # =============================================Initialize GUI=============================================#
 root = Tk()  # Initialize Tkinter for GUI
@@ -76,12 +69,8 @@ def image_load():  # loads the image and displays it on screen
 
     else:
         image = PIL.Image.open(filePath)  # Open image to memory
-        newImage = PIL.Image.open(filePath)
+        newImage = image
         thumbnailImage = PIL.Image.open(filePath)  # Open another copy of image, to be used as thumbnail
-
-        # thumbnailImage.thumbnail(size,
-        #                          PIL.Image.ANTIALIAS)  # Turn thumbnailImage into a image with max width and height of 'size'
-        # thumbnailImage.save("testBumbleKodaThumbnail.png") #Saves the thumbnail (for future use?)
 
         if image.mode != 'RGB':  # Removes alpha channel if RGBA, sets to RGB if grayscale/monotone
             image = image.convert('RGB')
@@ -101,13 +90,6 @@ def image_load():  # loads the image and displays it on screen
         photo = PhotoImage(file="tempThumbnail.gif")  # load image to UI
         display_image.configure(image=photo)
         display_image.photo = photo
-
-        ## Old way of displaying image - SLOW!
-        # for x in range(thumbnailImage.size[0]):  # width of thumbnailImage
-        #     for y in range(thumbnailImage.size[1]):  # height of thumnailImage
-        #         color = thumbnailPixels[x, y]  # retrieve tuple of pixel's colors
-        #         hexcodeColor = '#%02x%02x%02x' % color  # convert tuple to hexcode color
-        #         img.put(hexcodeColor, (x, y))  # updates img's pixel with new color
 
         stop = time.clock()  # timer (debug message)
         print "Image loaded and displayed in %f seconds." % (stop - start)  # debug message
@@ -145,11 +127,8 @@ def apply_matrix():  # Need to properly set this up!
             for r in range((-convMask + 1)/2, (convMask - 1)/2 + 1):  # +/- X values for convolution
                 for q in range((-convMask + 1)/2, (convMask - 1)/2 + 1):  # +/- Y values for convolution
                     color = list(pixels[x + r, y + q])  # receive color of pixel being weighted and added
-                    # print "color=",color
-                    # print "q=",q," r=",r, " convMult=",convMatrix[q + 1][r + 1]
                     for i in range(0, 3):  # for each R, G, and B
                         newValue[i] = color[i] * convMatrix[q + 1][r + 1] / normalizer
-                        # print color[i], "x", convMatrix[r+1][q+1], "=", newValue[i]
                         newColor[i] = newColor[i] + newValue[i]  # sum all in r and q area
             for j in range(0, 3):  # clip R,G,B channels
                 if newColor[j] > 255:
@@ -158,7 +137,6 @@ def apply_matrix():  # Need to properly set this up!
                     newColor[j] = 0
             newPixels[x, y] = tuple(newColor)  # convert back to tuple, store in new location
 
-    # pixels = newPixels  # update image data to new image
     newImage.save("processedImage.png")
     newImage.thumbnail(size, PIL.Image.ANTIALIAS)  # processed image to be displayed to UI
     newImage.save("processedImageThumbnail.gif")
@@ -187,8 +165,6 @@ def update_matrix():  # updates the normalizer and each value of the convolution
     convMatrix[2][1] = int(matrix_3_2.get())
     convMatrix[2][2] = int(matrix_3_3.get())
     normalizer = int(normalizer_entry.get())
-    # print normalizer # debug message
-    # print convMatrix # debug message
 
 
 def update_error():  # updates the error message displayed on screen
