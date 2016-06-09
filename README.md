@@ -9,6 +9,14 @@ I am thinking of rewriting it to both A) improve my python, and B) to attempt to
 
 <br>
 ***
+
+###Dependencies
+
+* python 2.7
+* PIL
+
+<br>
+***
 ###Example:
 
 Taking the picture of my sister's dog:
