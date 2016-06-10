@@ -2,8 +2,8 @@ import os
 # import PIL.Image
 from LoadedImage import LoadedImage
 
-if os.path.isfile("test.png"):
-    os.remove("test.png")
+if os.path.isfile("../images/test_save.png"):
+    os.remove("../images/test_save.png")
 
-image = LoadedImage("bumbleKoda.png")
-image.save_copy("test.png")
+image = LoadedImage("../images/bumbleKoda.png")
+image.save_copy("../images/test_save.png")
