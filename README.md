@@ -10,14 +10,14 @@ I am thinking of rewriting it to both A) improve my python, and B) to attempt to
 <br>
 ***
 
-###Dependencies
+### Dependencies
 
 * python 2.7
 * PIL
 
 <br>
 ***
-###Example:
+### Example:
 
 Taking the picture of my sister's dog:
 
@@ -33,9 +33,8 @@ gives the following result:
 ***
 <br>
 
-###Explanations of image convolution:
+### Explanations of image convolution:
 
 [Wikipedia](https://en.wikipedia.org/wiki/Kernel_(image_processing))
 
 [Interactive Explanation](http://setosa.io/ev/image-kernels/)
-
