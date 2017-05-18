@@ -8,6 +8,7 @@ The program was programmed using globals and did not take advantage of many pyth
 I am thinking of rewriting it to both A) improve my python, and B) to attempt to improve the speed by using numpy or OpenCL, or simply by using threads.
 
 <br>
+
 ***
 
 ### Dependencies
@@ -16,7 +17,9 @@ I am thinking of rewriting it to both A) improve my python, and B) to attempt to
 * PIL
 
 <br>
+
 ***
+
 ### Example:
 
 Taking the picture of my sister's dog:
@@ -30,6 +33,7 @@ and applying an edge detection matrix:
 gives the following result:
 
 ![Processed Image](https://github.com/FriedYeti/python-image-covolution/blob/master/processedImage.png)
+
 ***
 <br>
 
